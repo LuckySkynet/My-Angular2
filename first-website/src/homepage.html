@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 兼容IE-8 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- 控制页面布局，实现响应式布局，自适应缩放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>SkyNet-WebSite</title>
+    <!-- <link rel="stylesheet" type="text/css" href="../dist/components/reset.css">
+    <link rel="stylesheet" type="text/css" href="../dist/components/site.css">
+    <link rel="stylesheet" type="text/css" href="../dist/components/container.css">
+    <link rel="stylesheet" type="text/css" href="../dist/components/grid.css">
+    <link rel="stylesheet" type="text/css" href="../dist/components/header.css">
+    <link rel="stylesheet" type="text/css" href="../dist/components/image.css">
+    <link rel="stylesheet" type="text/css" href="../dist/components/menu.css">
+    <link rel="stylesheet" type="text/css" href="../dist/components/divider.css">
+    <link rel="stylesheet" type="text/css" href="../dist/components/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="../dist/components/segment.css">
+    <link rel="stylesheet" type="text/css" href="../dist/components/button.css">
+    <link rel="stylesheet" type="text/css" href="../dist/components/list.css">
+    <link rel="stylesheet" type="text/css" href="../dist/components/icon.css">
+    <link rel="stylesheet" type="text/css" href="../dist/components/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="../dist/components/transition.css"> -->
+    <link rel="stylesheet" type="text/css" href="../dist/semantic.css">
+    <style type="text/css">
+    .column {
+        max-width: 450px;
+    }
+    </style>
+</head>
+
+<body>
+    <!-- 弹出层modal：用户登录页面 -->
+    <div class="ui basic modal login">
+        <!-- 设置居中网格 -->
+        <div class="ui center aligned grid">
+            <!-- 设置宽度，同style="max-width:450px" -->
+            <div class="column">
+                <!-- 设置标题字体及大小 -->
+                <h2 class="ui inverted header">Log-in to your account</h2>
+                <!-- 创建表单 -->
+                <form class="ui large form">
+                    <div class="ui stacked segment">
+                        <!-- 通过field类和jquery进行输入信息校验 -->
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="email" placeholder="E-mail address">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="text" name="password" placeholder="Password">
+                            </div>
+                        </div>
+                        <button class="ui fluid large teal submit button">Login</button>
+                        <div class="ui error message"></div>
+                    </div>
+                </form>
+                <div class="ui message">
+                    New to us? <a href="#">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 弹出层：注册页面 -->
+    <div class="ui basic modal signup">
+        <div class="ui center aligned grid">
+            <div class="column">
+                <h2 class="ui inverted header">Signup Your Own Account</h2>
+                <form class="ui large form">
+                    <div class="ui stacked segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="email" placeholder="E-mail address">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <select class="ui dropdown">
+                                <option value="">Gender</option>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <select name="skills" multiple="" class="ui fluid dropdown">
+                                <option value="">Skills</option>
+                                <option value="angular">Angular</option>
+                                <option value="css">CSS</option>
+                                <option value="design">Graphic Design</option>
+                                <option value="ember">Ember</option>
+                                <option value="html">HTML</option>
+                                <option value="ia">Information Architecture</option>
+                                <option value="javascript">Javascript</option>
+                                <option value="mech">Mechanical Engineering</option>
+                                <option value="meteor">Meteor</option>
+                                <option value="node">NodeJS</option>
+                                <option value="plumbing">Plumbing</option>
+                                <option value="python">Python</option>
+                                <option value="rails">Rails</option>
+                                <option value="react">React</option>
+                                <option value="repair">Kitchen Repair</option>
+                                <option value="ruby">Ruby</option>
+                                <option value="ui">UI Design</option>
+                                <option value="ux">User Experience</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <div class="ui toggle checkbox" id="agree">
+                                <input type="checkbox" name="agree">
+                                <label>I agree to the Terms and Conditions</label>
+                            </div>
+                        </div>
+                        <button class="ui disabled fluid large teal submit button" id="signupbtn">Signup</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 边栏sidebar：
+         left:左侧边栏，同top bottom right
+         labeled icon menu:标签图标菜单
+     -->
+    <div class="ui left inverted vertical sidebar labeled icon menu">
+        <a class="item" href="#">
+            <i class="home icon"></i> Home
+        </a>
+        <a class="item">
+            <i class="setting icon"></i> Setting
+        </a>
+    </div>
+
+    <!-- pusher:
+         若有sidebar则必须同时带有pusher用于设置站点内容即正文
+    -->
+    <div class="pusher">
+     
+        <!-- Site content !-->
+        <!-- 主菜单：显示在页面顶部
+             vertical:垂直分布，避免顶部留有空白
+             inverted:颠倒黑白，黑色背景白色字体
+             center aligned:居中对齐
+             segment:分割布局
+        -->
+        <div class="ui vertical inverted center aligned segment">
+            <div class="ui container">
+                <!-- 设置menu
+                     secondary:次级类，可以忽略对齐方式
+                     pointing:下划线代替菜单项的竖线分隔符
+                 -->
+                <div class="ui large secondary inverted pointing menu">
+                    <a class="item" id="sidebar" name="menu"><i class="sidebar icon"></i></a>
+                    <a class="item" name="menu">Home</a>
+                    <a class="item" name="menu">Resource</a>
+                    <a class="item" name="menu">Community</a>
+                    <div class="right menu">
+                        <button class="ui inverted button" id="login">
+                            Login
+                        </button>
+                        <button class="ui inverted button" id="signup">
+                            Signup
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="ui text container">
+                <h1>My First Website</h1>
+                <h2>Hello World</h2>
+                <button class="ui primary button">JOIN</button>
+            </div>
+        </div>
+        <div class="ui vertical stripe segment">
+            <div class="ui middle aligned stackable grid container">
+                <div class="row">
+                    <div class="eight wide column">
+                        <h3 class="ui header">We Help Companies and Companions</h3>
+                        <p>We can give your company superpowers to do things that they never thought possible. Let us delight your customers and empower your needs...through pure data analytics.</p>
+                        <h3 class="ui header">We Make Bananas That Can Dance</h3>
+                        <p>Yes that's right, you thought it was the stuff of dreams, but even bananas can be bioengineered.</p>
+                    </div>
+                    <div class="six wide right floated column">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="center aligned column">
+                        <a class="ui huge button">Check Them Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 页脚 -->
+    <div class="ui inverted vertical footer segment">
+        <div class="ui center aligned container">
+            <div class="ui stackable inverted divided grid">
+                <div class="three wide column">
+                    <h4 class="ui inverted header">Group 1</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Link One</a>
+                        <a href="#" class="item">Link Two</a>
+                        <a href="#" class="item">Link Three</a>
+                        <a href="#" class="item">Link Four</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">Group 2</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Link One</a>
+                        <a href="#" class="item">Link Two</a>
+                        <a href="#" class="item">Link Three</a>
+                        <a href="#" class="item">Link Four</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">Group 3</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Link One</a>
+                        <a href="#" class="item">Link Two</a>
+                        <a href="#" class="item">Link Three</a>
+                        <a href="#" class="item">Link Four</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header">Footer Header</h4>
+                    <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <div class="ui horizontal inverted small divided link list">
+                <a class="item" href="#">Site Map</a>
+                <a class="item" href="#">Contact Us</a>
+                <a class="item" href="#">Terms and Conditions</a>
+                <a class="item" href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../assets/library/jquery.min.js"></script>
+<script src="../dist/components/visibility.js"></script>
+<script src="../dist/components/sidebar.js"></script>
+<script src="../dist/components/transition.js"></script>
+<script src="../dist/semantic.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    // 调用dropdown
+    $('.ui.dropdown').dropdown({
+        on:'click'
+    });
+
+
+    $('.ui.checkbox').checkbox();
+
+    $('#agree').click(function(event) {
+        /* Act on the event */
+        var btn = $('#signupbtn');
+        var aclass = this.className;
+        var flag = aclass.toString().indexOf('checked');
+        if (flag > -1) {
+            btn.attr('class', 'ui fluid large teal submit button');
+        } else {
+            btn.attr('class', 'ui disabled fluid large teal submit button');
+        }
+    });
+
+
+    $("a[name='menu']").mouseover(function(event) {
+        /* Act on the event */
+        $(this).attr({
+            class: 'active item',
+        });
+    });
+
+    $("a[name='menu']").mouseleave(function(event) {
+        /* Act on the event */
+        $(this).attr({
+            class: 'item',
+        });
+    });
+
+    $('#login').click(function(argument) {
+        $('.ui.modal.login').modal('show');
+    });
+
+    $('#signup').click(function(argument) {
+        $('.ui.modal.signup').modal('show');
+    });
+
+    $('#sidebar').click(function(event) {
+        $('.ui.sidebar')
+            .sidebar('toggle');
+    });
+
+    // 登录信息校验：email为标准email类型；password不少于6个字符
+    $('.ui.form')
+        .form({
+            fields: {
+                email: {
+                    identifier: 'email',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'Please enter your e-mail'
+                    }, {
+                        type: 'email',
+                        prompt: 'Please enter a valid e-mail'
+                    }]
+                },
+                password: {
+                    identifier: 'password',
+                    rules: [{
+                        type: 'empty',
+                        prompt: 'Please enter your password'
+                    }, {
+                        type: 'length[6]',
+                        prompt: 'Your password must be at least 6 characters'
+                    }]
+                }
+            }
+        });
+
+});
+</script>
+
+</html>
